@@ -113,7 +113,13 @@ function M.toggle_quick_menu()
         Harpoon_cmd_bufh,
         "n",
         "<CR>",
-        "<Cmd>lua require('harpoon.cmd-ui').select_menu_item()<CR>",
+        function()
+            if vim.o.filetype == 'harpoon' then
+                return "<Cmd>lua require('harpoon.cmd-ui').select_menu_item()<CR>"
+            else
+                return "<CR>"
+            end
+        end,
         {}
     )
     vim.cmd(
